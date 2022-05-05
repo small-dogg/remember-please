@@ -14,6 +14,6 @@ public class WeatherController {
 
     @GetMapping("/weather")
     public WeatherResponseDto getWeather(){
-        return new WeatherResponseDto();
+        return weatherService.getWeather("test");
     }
 }
