@@ -1,4 +1,4 @@
-package com.smalldogg.rememberplease.controller;
+package com.smalldogg.rememberplease.domain.fulfillment;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
