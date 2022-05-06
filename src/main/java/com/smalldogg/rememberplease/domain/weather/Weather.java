@@ -15,14 +15,12 @@ public class Weather extends BaseTimeEntity implements Persistable<String> {
     @Id
     private String id;
     private String name;
-    private String dong;//영작
     private float tempAvg;//오늘 평균 기온
     private float temp;//현재 기온
 
-    public Weather(String id, String name, String dong, float tempAvg, float temp) {
+    public Weather(String id, String name, float tempAvg, float temp) {
         this.id = id;
         this.name = name;
-        this.dong = dong;
         this.tempAvg = tempAvg;
         this.temp = temp;
     }

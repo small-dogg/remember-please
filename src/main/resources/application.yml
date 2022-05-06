@@ -25,3 +25,10 @@ spring:
 logging.level:
   org.hibernate.sql: debug
   #org.hibernate.type: trace
+
+ncp:
+  maps:
+    client.ID: e70f888j98
+    client.secret: yBkovEXm77bAtJOYwukK8KcqzqXcz1ESTHBM9Pa0
+    reverse-geocoding:
+      url: https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc
