@@ -22,9 +22,6 @@ public class WeatherController {
                                          @RequestParam("y") String y,
                                          @RequestParam("weatherId") String weatherId) throws IOException {
 
-        x = "126.98470";
-        y = "37.30884";
-
         weatherService.getWeather(weatherId, x, y);
 
         return new WeatherResponseDto("aa", 1.0f, 2.0f);
