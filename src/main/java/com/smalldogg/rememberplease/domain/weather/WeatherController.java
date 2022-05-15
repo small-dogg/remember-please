@@ -1,11 +1,10 @@
 package com.smalldogg.rememberplease.domain.weather;
 
+import com.smalldogg.rememberplease.domain.weather.dto.LocationDto;
 import com.smalldogg.rememberplease.domain.weather.dto.WeatherResponseDto;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @RestController
@@ -18,11 +17,9 @@ public class WeatherController {
     }
 
     @GetMapping("/weather")
-    public WeatherResponseDto getWeather(@RequestParam("x") String x,
-                                         @RequestParam("y") String y,
-                                         @RequestParam("weatherId") String weatherId) throws IOException {
+    public WeatherResponseDto getWeather(LocationDto locationDto, HttpServletRequest request) throws IOException {
 
-        weatherService.getWeather(weatherId, x, y);
+        weatherService.getWeather(locationDto);
 
         return new WeatherResponseDto("aa", 1.0f, 2.0f);
     }
