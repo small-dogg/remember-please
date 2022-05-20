@@ -5,7 +5,7 @@ spring:
   datasource:
     url: jdbc:h2:tcp://localhost/~/remember-please
     username: sa
-    password: qwe1212!Q
+    password:
     driver-class-name: org.h2.Driver
 
   jpa:
@@ -32,3 +32,8 @@ ncp:
     client.secret: yBkovEXm77bAtJOYwukK8KcqzqXcz1ESTHBM9Pa0
     reverse-geocoding:
       url: https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc
+openapi:
+  weather:
+    endpoint: http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst
+    servicekey: ZxARRsGHdZL%2BVvVly2HeQxN6kBFsS3GdrphKBRy23pBpWFPBZiR92G73YrbXScToDFb8Qn3ZlFbvLuSIdqdlug%3D%3D
+#ZxARRsGHdZL+VvVly2HeQxN6kBFsS3GdrphKBRy23pBpWFPBZiR92G73YrbXScToDFb8Qn3ZlFbvLuSIdqdlug==

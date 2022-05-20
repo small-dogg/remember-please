@@ -10,13 +10,10 @@ public class LocationDto {
     private String id;
     private String latitude;
     private String longitude;
+    private String x;
+    private String y;
 
     public LocationDto(String id) {
         this.id = id;
-    }
-
-    public LocationDto(String latitude, String longitude) {
-        this.latitude = latitude;
-        this.longitude = longitude;
     }
 }
