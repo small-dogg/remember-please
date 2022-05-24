@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import java.net.URISyntaxException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -16,7 +18,7 @@ class ForecastClientTest {
     ForecastClient forecastClient;
 
     @Test
-    void forecastClientTest() {
+    void forecastClientTest() throws URISyntaxException {
         forecastClient.getForecast("60","121");
     }
 }

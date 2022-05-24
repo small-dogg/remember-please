@@ -6,8 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
-public class TodoResponseDto {
-    private Long id;
+public class TodoRequestDto {
     private String name;
     private String content;
     private LocalDate dueDate;
