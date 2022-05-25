@@ -28,9 +28,9 @@
     </div>
 <table>
     <tr>
-        <th style="width: 5%"></th>
+        <th style="width: 3%"></th>
         <th style="width: 60%">내용</th>
-        <th>기한</th>
+        <th >기한</th>
         <th style="width: 10%">삭제</th>
     </tr>
 
@@ -41,7 +41,7 @@
         <input type="hidden"id="_done" name="done" value="no"/></td>
         </form>
         <td th:text="${todo.content}">내용</td>
-        <td th:text="${todo.dueDate}">기한</td>
+        <td th:text="${#temporals.format(todo.dueDateTime, 'yyyy-MM-dd HH:mm')}">기한</td>
         <td>
             <form method="post" th:action="@{'/'+${todo.id}+'/delete'}">
             <button class="w-10 btn btn-secondary btn-sm"

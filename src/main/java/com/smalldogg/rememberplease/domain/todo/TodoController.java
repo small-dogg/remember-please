@@ -40,7 +40,7 @@ public class TodoController {
     @GetMapping("/{todoId}/edit")
     public String editTodo(@PathVariable Long todoId, Model model) {
         model.addAttribute("todo", todoService.findTodo(todoId));
-        return "todoEditForm";
+        return "null";
     }
 
     @PostMapping("/{todoId}/edit")

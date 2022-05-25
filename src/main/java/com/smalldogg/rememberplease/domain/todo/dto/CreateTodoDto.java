@@ -10,6 +10,6 @@ import java.time.LocalDateTime;
 @Data
 public class CreateTodoDto {
     private String content;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate dueDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime dueDateTime;
 }

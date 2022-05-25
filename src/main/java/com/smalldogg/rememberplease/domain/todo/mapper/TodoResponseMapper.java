@@ -4,9 +4,11 @@ import com.smalldogg.rememberplease.domain.GenericMapper;
 import com.smalldogg.rememberplease.domain.todo.Todo;
 import com.smalldogg.rememberplease.domain.todo.dto.TodoResponseDto;
 import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface TodoResponseMapper extends GenericMapper<List<TodoResponseDto>, List<Todo>> {
+    TodoResponseMapper INSTANCE = Mappers.getMapper(TodoResponseMapper.class);
 }

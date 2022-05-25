@@ -21,9 +21,6 @@ import java.util.Optional;
 public class todoServiceImpl implements TodoService {
 
     private final TodoRepository todoRepository;
-    private final CreateTodoMapper createTodoMapper = Mappers.getMapper(CreateTodoMapper.class);
-    private final TodoResponseMapper todoResponseMapper = Mappers.getMapper(TodoResponseMapper.class);
-    private final TodoRequestMapper todoRequestMapper = Mappers.getMapper(TodoRequestMapper.class);
 
     @Override
     public TodoResponseDto findTodo(Long todoId) {
@@ -33,12 +30,12 @@ public class todoServiceImpl implements TodoService {
 
     @Override
     public List<TodoResponseDto> findTodos() {
-        return todoResponseMapper.toDto(todoRepository.findAll());
+        return TodoResponseMapper.INSTANCE.toDto(todoRepository.findAll());
     }
 
     @Override
     public Todo createTodo(CreateTodoDto createTodoDto) {
-        return todoRepository.save(createTodoMapper.toEntity(createTodoDto));
+        return todoRepository.save(CreateTodoMapper.INSTANCE.toEntity(createTodoDto));
     }
 
     @Override
@@ -53,7 +50,7 @@ public class todoServiceImpl implements TodoService {
         if(todoOptional.isPresent()){
             Todo todo = todoOptional.get();
 
-            todoRequestMapper.updateFromDto(todoRequestDto,todo);
+            TodoRequestMapper.INSTANCE.updateFromDto(todoRequestDto,todo);
         }
     }
 }

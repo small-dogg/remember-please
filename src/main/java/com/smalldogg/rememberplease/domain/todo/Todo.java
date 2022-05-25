@@ -18,7 +18,7 @@ public class Todo extends BaseTimeEntity {
     @Id @GeneratedValue
     private Long id;
     private String content;
-    private LocalDate dueDate;
+    private LocalDateTime dueDateTime;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "folder_id")
     private Folder folder;

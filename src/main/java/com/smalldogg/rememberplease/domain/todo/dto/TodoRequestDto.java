@@ -9,6 +9,6 @@ import java.time.LocalDateTime;
 public class TodoRequestDto {
     private String name;
     private String content;
-    private LocalDate dueDate;
+    private LocalDateTime dueDateTime;
     private Boolean done;
 }
