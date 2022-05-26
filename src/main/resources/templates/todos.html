@@ -13,22 +13,27 @@
 <script type="text/javascript"
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_-BWnb1ZkVFH6radPa0AAcG7CbE_ieG8&libraries=&v=weekly"></script>
 <script th:src="@{/js/mapFunction.js}"></script>
-<div class="container" style="max-width: 800px">
+<div class="container" style="max-width: 1200px">
     <div class="py-5 text-center">
         <h2>할일 목록</h2>
     </div>
 
     <div class="row">
-        <div class="col">
-            <button class="btn btn-primary float-end"
+        <div class="col-12">
+            <button class="btn btn-primary"
                     onclick="location.href='todoAddForm.html'"
                     th:onclick="|location.href='@{/add}'|"
                     type="button">할일 등록</button>
+            <button class="btn btn-secondary"
+                    onclick="location.href='folderAddForm.html'"
+                    th:onclick="|location.href='@{/folder}'|"
+                    type="button">분류 추가</button>
         </div>
     </div>
 <table>
     <tr>
         <th style="width: 3%"></th>
+        <th style="width: 10%">분류</th>
         <th style="width: 60%">내용</th>
         <th >기한</th>
         <th style="width: 10%">삭제</th>
@@ -40,6 +45,7 @@
         <td><input type="checkbox"id="done" name="done" class="form-check-input"/>
         <input type="hidden"id="_done" name="done" value="no"/></td>
         </form>
+        <td th:text="${todo.folder.name}">분류</td>
         <td th:text="${todo.content}">내용</td>
         <td th:text="${#temporals.format(todo.dueDateTime, 'yyyy-MM-dd HH:mm')}">기한</td>
         <td>

@@ -1,7 +1,6 @@
 package com.smalldogg.rememberplease.domain.todo.service;
 
 import com.smalldogg.rememberplease.domain.todo.entity.Todo;
-import com.smalldogg.rememberplease.domain.todo.dto.CreateTodoDto;
 import com.smalldogg.rememberplease.domain.todo.dto.TodoRequestDto;
 import com.smalldogg.rememberplease.domain.todo.dto.TodoResponseDto;
 
@@ -11,7 +10,7 @@ public interface TodoService {
     TodoResponseDto findTodo(Long todoId);
     List<TodoResponseDto> findTodos();
 
-    Todo createTodo(CreateTodoDto createTodoDto);
+    Todo createTodo(TodoRequestDto todoRequestDto);
 
     void deleteTodo(Long todoId);
 

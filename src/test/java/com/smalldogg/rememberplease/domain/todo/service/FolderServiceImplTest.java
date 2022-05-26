@@ -23,13 +23,9 @@ class FolderServiceImplTest {
     @BeforeEach
     void setup() {
         FolderRequestDto folderRequestDto1 = new FolderRequestDto();
-        folderRequestDto1.setId(1L);
-        folderRequestDto1.setName("학습");
         FolderRequestDto folderRequestDto2 = new FolderRequestDto();
-        folderRequestDto2.setId(2L);
-        folderRequestDto2.setName("집안일");
-        folderService.createFolder(folderRequestDto1);
-        folderService.createFolder(folderRequestDto2);
+        folderService.createFolder("학습");
+        folderService.createFolder("집안일");
     }
 
     @Test

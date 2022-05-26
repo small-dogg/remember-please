@@ -7,5 +7,4 @@ public class FolderRequestDto {
 
     private Long id;
     private String name;
-    private Long folderId;
 }

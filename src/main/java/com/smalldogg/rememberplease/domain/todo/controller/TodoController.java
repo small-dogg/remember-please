@@ -1,13 +1,16 @@
 package com.smalldogg.rememberplease.domain.todo.controller;
 
+import com.smalldogg.rememberplease.domain.todo.dto.FolderResponseDto;
 import com.smalldogg.rememberplease.domain.todo.entity.Todo;
-import com.smalldogg.rememberplease.domain.todo.dto.CreateTodoDto;
 import com.smalldogg.rememberplease.domain.todo.dto.TodoRequestDto;
+import com.smalldogg.rememberplease.domain.todo.service.FolderService;
 import com.smalldogg.rememberplease.domain.todo.service.TodoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 public class TodoController {
 
     private final TodoService todoService;
+    private final FolderService folderService;
 
     @GetMapping
     public String getTodos(Model model) {
@@ -30,25 +34,29 @@ public class TodoController {
 
     @GetMapping("/add")
     public String getTodoAddForm(Model model) {
+        List<FolderResponseDto> folders = folderService.findFolders();
+        model.addAttribute("folders", folders);
         return "todoAddForm";
     }
 
     @PostMapping("/add")
-    public String addTodo(CreateTodoDto param) {
+    public String createTodo(TodoRequestDto param) {
         todoService.createTodo(param);
         return "redirect:/";
     }
 
     @GetMapping("/{todoId}/edit")
-    public String editTodo(@PathVariable Long todoId, Model model) {
+    public String editTodoForm(@PathVariable Long todoId, Model model) {
+        List<FolderResponseDto> folders = folderService.findFolders();
+        model.addAttribute("folders", folders);
         model.addAttribute("todo", todoService.findTodo(todoId));
-        return "null";
+        return "todoEditForm";
     }
 
     @PostMapping("/{todoId}/edit")
     public String editTodo(@PathVariable Long todoId, @ModelAttribute TodoRequestDto todoRequestDto) {
         todoService.updateTodo(todoId, todoRequestDto);
-        return "redirect:/{todoId}";
+        return "redirect:/";
     }
 
     @PostMapping("/{todoId}/delete")

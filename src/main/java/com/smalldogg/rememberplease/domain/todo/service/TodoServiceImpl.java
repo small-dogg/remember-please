@@ -1,11 +1,12 @@
 package com.smalldogg.rememberplease.domain.todo.service;
 
+import com.smalldogg.rememberplease.domain.todo.entity.Folder;
 import com.smalldogg.rememberplease.domain.todo.entity.Todo;
+import com.smalldogg.rememberplease.domain.todo.mapper.TodoResponseMapper;
+import com.smalldogg.rememberplease.domain.todo.repository.FolderRepository;
 import com.smalldogg.rememberplease.domain.todo.repository.TodoRepository;
-import com.smalldogg.rememberplease.domain.todo.dto.CreateTodoDto;
 import com.smalldogg.rememberplease.domain.todo.dto.TodoRequestDto;
 import com.smalldogg.rememberplease.domain.todo.dto.TodoResponseDto;
-import com.smalldogg.rememberplease.domain.todo.mapper.CreateTodoMapper;
 import com.smalldogg.rememberplease.domain.todo.mapper.TodoRequestMapper;
 import com.smalldogg.rememberplease.domain.todo.mapper.TodosResponseMapper;
 import lombok.RequiredArgsConstructor;
@@ -22,11 +23,13 @@ import java.util.Optional;
 public class TodoServiceImpl implements TodoService {
 
     private final TodoRepository todoRepository;
+    private final FolderRepository folderRepository;
 
     @Override
     public TodoResponseDto findTodo(Long todoId) {
-        todoRepository.findById(todoId);
-        return new TodoResponseDto();
+        Optional<Todo> todoOptional = todoRepository.findById(todoId);
+        Todo todo = todoOptional.orElseThrow(() -> new NoSuchElementException("Todo 없음"));
+        return TodoResponseMapper.INSTANCE.toDto(todo);
     }
 
     @Override
@@ -35,8 +38,11 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
-    public Todo createTodo(CreateTodoDto createTodoDto) {
-        return todoRepository.save(CreateTodoMapper.INSTANCE.toEntity(createTodoDto));
+    public Todo createTodo(TodoRequestDto todoRequestDto) {
+        Optional<Folder> folderOptional = folderRepository.findById(todoRequestDto.getFolderId());
+        Folder folder = folderOptional.orElseThrow(() -> new NoSuchElementException("분류 없음"));
+        Todo todo = new Todo(todoRequestDto.getContent(), todoRequestDto.getDueDateTime(), folder);
+        return todoRepository.save(todo);
     }
 
     @Override

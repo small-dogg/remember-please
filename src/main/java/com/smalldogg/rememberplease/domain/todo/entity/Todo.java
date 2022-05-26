@@ -24,4 +24,9 @@ public class Todo extends BaseTimeEntity {
     private Folder folder;
     private Boolean done;
 
+    public Todo(String content, LocalDateTime dueDateTime, Folder folder) {
+        this.content = content;
+        this.dueDateTime = dueDateTime;
+        this.folder = folder;
+    }
 }

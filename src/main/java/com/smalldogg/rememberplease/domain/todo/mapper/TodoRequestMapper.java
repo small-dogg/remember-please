@@ -9,4 +9,6 @@ import org.mapstruct.factory.Mappers;
 @Mapper(componentModel = "spring")
 public interface TodoRequestMapper extends GenericMapper<TodoRequestDto, Todo> {
     TodoRequestMapper INSTANCE = Mappers.getMapper(TodoRequestMapper.class);
+
+
 }

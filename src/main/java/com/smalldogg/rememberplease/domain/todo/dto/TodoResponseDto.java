@@ -11,5 +11,6 @@ public class TodoResponseDto {
     private String name;
     private String content;
     private LocalDateTime dueDateTime;
+    private FolderResponseDto folder;
     private Boolean done;
 }

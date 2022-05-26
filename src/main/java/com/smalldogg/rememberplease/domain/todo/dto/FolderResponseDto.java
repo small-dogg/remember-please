@@ -6,5 +6,4 @@ import lombok.Data;
 public class FolderResponseDto {
     private Long id;
     private String name;
-    private Long folderId;
 }

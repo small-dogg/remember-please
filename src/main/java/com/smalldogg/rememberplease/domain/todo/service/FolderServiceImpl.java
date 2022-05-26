@@ -24,7 +24,7 @@ public class FolderServiceImpl implements FolderService{
     @Override
     public FolderResponseDto findFolderById(Long folderId) {
         Optional<Folder> folderOptional = folderRepository.findById(folderId);
-        Folder folder = folderOptional.orElseThrow(() -> new NoSuchElementException("폴더 없음"));
+        Folder folder = folderOptional.orElseThrow(() -> new NoSuchElementException("분류 없음"));
 
         return FolderResponseMapper.INSTANCE.toDto(folder);
     }
@@ -36,23 +36,22 @@ public class FolderServiceImpl implements FolderService{
     }
 
     @Override
-    public FolderResponseDto createFolder(FolderRequestDto folderRequestDto) {
-        Folder folder = FolderRequestMapper.INSTANCE.toEntity(folderRequestDto);
+    public FolderResponseDto createFolder(String name) {
+        Folder folder = new Folder(name);
         Folder save = folderRepository.save(folder);
         return FolderResponseMapper.INSTANCE.toDto(save);
-
     }
 
     @Override
     public void updateFolder(FolderRequestDto folderRequestDto) {
         Optional<Folder> folderOptional = folderRepository.findById(folderRequestDto.getId());
-        Folder folder = folderOptional.orElseThrow(() -> new NoSuchElementException("폴더 없음"));
-
+        Folder folder = folderOptional.orElseThrow(() -> new NoSuchElementException("분류 없음"));
+        folderRepository.updateFolder(folderRequestDto);
     }
 
     @Override
     public void deleteFolder(Long folderId) {
         Optional<Folder> folderOptional = folderRepository.findById(folderId);
-        folderRepository.delete(folderOptional.orElseThrow(() -> new NoSuchElementException("폴더 없음")));
+        folderRepository.delete(folderOptional.orElseThrow(() -> new NoSuchElementException("분류 없음")));
     }
 }
