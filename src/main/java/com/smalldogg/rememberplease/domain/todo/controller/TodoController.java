@@ -1,7 +1,9 @@
-package com.smalldogg.rememberplease.domain.todo;
+package com.smalldogg.rememberplease.domain.todo.controller;
 
+import com.smalldogg.rememberplease.domain.todo.entity.Todo;
 import com.smalldogg.rememberplease.domain.todo.dto.CreateTodoDto;
 import com.smalldogg.rememberplease.domain.todo.dto.TodoRequestDto;
+import com.smalldogg.rememberplease.domain.todo.service.TodoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

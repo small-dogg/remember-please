@@ -1,10 +1,9 @@
-package com.smalldogg.rememberplease.domain.todo;
+package com.smalldogg.rememberplease.domain.todo.service;
 
+import com.smalldogg.rememberplease.domain.todo.entity.Todo;
 import com.smalldogg.rememberplease.domain.todo.dto.CreateTodoDto;
 import com.smalldogg.rememberplease.domain.todo.dto.TodoRequestDto;
 import com.smalldogg.rememberplease.domain.todo.dto.TodoResponseDto;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

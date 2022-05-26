@@ -1,6 +1,5 @@
 package com.smalldogg.rememberplease.domain.todo.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -12,4 +11,5 @@ public class CreateTodoDto {
     private String content;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime dueDateTime;
+    private Long folderId;
 }

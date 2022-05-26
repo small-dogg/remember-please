@@ -1,10 +1,10 @@
-package com.smalldogg.rememberplease.domain.todo;
+package com.smalldogg.rememberplease.domain.todo.entity;
 
 import com.smalldogg.rememberplease.domain.BaseTimeEntity;
+import com.smalldogg.rememberplease.domain.todo.entity.Folder;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity

@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 
 @Data
 public class TodoRequestDto {
-    private String name;
     private String content;
     private LocalDateTime dueDateTime;
     private Boolean done;
