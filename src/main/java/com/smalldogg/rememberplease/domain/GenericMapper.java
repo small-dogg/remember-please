@@ -9,6 +9,6 @@ public interface GenericMapper<D, E> {
     D toDto(E e);
     E toEntity(D d);
 
-    @BeanMapping(nullValueMappingStrategy = NullValueMappingStrategy.RETURN_DEFAULT)
+    @BeanMapping(nullValueMappingStrategy = NullValueMappingStrategy.RETURN_NULL)
     void updateFromDto(D dto, @MappingTarget E entity);
 }

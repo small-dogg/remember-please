@@ -44,6 +44,10 @@
             <label for="dueDateTime">기한</label>
             <input id="dueDateTime" name="dueDateTime" th:value="${#temporals.format(todo.dueDateTime, 'yyyy-MM-dd HH:mm')}" class="form-control" width="276"/>
         </div>
+        <div>
+            <label class="form-check-label" for="done">완료 여부</label>
+            <input class="form-check-input" type="checkbox" id="done" name="done" th:field="${todo.done}"/>
+        </div>
         <hr class="my-4">
         <div class="row">
             <div class="col">
@@ -63,6 +67,8 @@
         footer: true, modal: true,
         format: 'yyyy-mm-dd HH:MM'
     });
+
+
 </script>
 </body>
 </html>

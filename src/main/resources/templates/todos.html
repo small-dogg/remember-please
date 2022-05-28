@@ -23,40 +23,55 @@
             <button class="btn btn-primary"
                     onclick="location.href='todoAddForm.html'"
                     th:onclick="|location.href='@{/add}'|"
-                    type="button">할일 등록</button>
+                    type="button">할일 등록
+            </button>
             <button class="btn btn-secondary"
                     onclick="location.href='folderAddForm.html'"
                     th:onclick="|location.href='@{/folder}'|"
-                    type="button">분류 추가</button>
+                    type="button">분류 추가
+            </button>
         </div>
     </div>
-<table>
-    <tr>
-        <th style="width: 3%"></th>
-        <th style="width: 10%">분류</th>
-        <th style="width: 60%">내용</th>
-        <th >기한</th>
-        <th style="width: 10%">삭제</th>
-    </tr>
+    <table>
+        <tr>
+            <th style="width: 10%">완료 여부</th>
+            <th style="width: 10%">분류</th>
+            <th style="width: 50%">내용</th>
+            <th style="width: 20%">기한</th>
+            <th style="width: 10%">삭제</th>
+        </tr>
 
 
-    <tr th:each="todo:${todos}">
-        <form method="post" th:action="'/'">
-        <td><input type="checkbox"id="done" name="done" class="form-check-input"/>
-        <input type="hidden"id="_done" name="done" value="no"/></td>
-        </form>
-        <td th:text="${todo.folder.name}">분류</td>
-        <td th:text="${todo.content}">내용</td>
-        <td th:text="${#temporals.format(todo.dueDateTime, 'yyyy-MM-dd HH:mm')}">기한</td>
-        <td>
-            <form method="post" th:action="@{'/'+${todo.id}+'/delete'}">
-            <button class="w-10 btn btn-secondary btn-sm"
-                    th:data-confirm-delete="|${todo.content} 항목을 제거하시겠습니까?|"
-                    onclick="return confirm(this.getAttribute('data-confirm-delete'))">삭제</button>
-            </form>
-        </td>
-    </tr>
-</table>
+        <tr th:each="todo:${todos}">
+            <td>
+                <input class="form-check-input" type="checkbox" id="done" name="done" th:checked="${todo.done}"
+                       th:onclick="|test(${todo.id},this.checked)|"/>
+            </td>
+            <td th:text="${todo.folder.name}">분류</td>
+            <td th:text="${todo.content}">내용</td>
+            <td th:text="${#temporals.format(todo.dueDateTime, 'yyyy-MM-dd HH:mm')}">기한</td>
+            <td>
+                <form method="post" th:action="@{'/'+${todo.id}+'/delete'}">
+                    <button class="w-10 btn btn-secondary btn-sm"
+                            th:data-confirm-delete="|${todo.content} 항목을 제거하시겠습니까?|"
+                            onclick="return confirm(this.getAttribute('data-confirm-delete'))">삭제
+                    </button>
+                </form>
+            </td>
+        </tr>
+    </table>
 </div>
 </body>
+<script th:inline="javascript">
+    function test(id, done) {
+
+        let form = new FormData();
+        form.append('done', done);
+
+        fetch('/' + id + '/edit', {
+            method: 'post',
+            body: form
+        })
+    }
+</script>
 </html>

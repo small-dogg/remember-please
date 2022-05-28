@@ -1,8 +1,8 @@
 package com.smalldogg.rememberplease.domain.todo.entity;
 
 import com.smalldogg.rememberplease.domain.BaseTimeEntity;
-import com.smalldogg.rememberplease.domain.todo.entity.Folder;
 import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 @Getter
+@DynamicUpdate
 public class Todo extends BaseTimeEntity {
 
     @Id @GeneratedValue
@@ -28,5 +29,22 @@ public class Todo extends BaseTimeEntity {
         this.content = content;
         this.dueDateTime = dueDateTime;
         this.folder = folder;
+    }
+
+    public void changeContent(String content){
+        this.content = content;
+    }
+
+    public void changeStatus(Boolean done) {
+        this.done = done;
+    }
+
+    public void changeFolder(Folder folder) {
+        this.folder = folder;
+        folder.getTodo().add(this);
+    }
+
+    public void changeDueDateTime(LocalDateTime dueDateTime) {
+        this.dueDateTime = dueDateTime;
     }
 }

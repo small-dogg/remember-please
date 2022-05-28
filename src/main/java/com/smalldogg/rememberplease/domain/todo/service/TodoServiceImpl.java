@@ -7,11 +7,11 @@ import com.smalldogg.rememberplease.domain.todo.repository.FolderRepository;
 import com.smalldogg.rememberplease.domain.todo.repository.TodoRepository;
 import com.smalldogg.rememberplease.domain.todo.dto.TodoRequestDto;
 import com.smalldogg.rememberplease.domain.todo.dto.TodoResponseDto;
-import com.smalldogg.rememberplease.domain.todo.mapper.TodoRequestMapper;
 import com.smalldogg.rememberplease.domain.todo.mapper.TodosResponseMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -51,10 +51,37 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
-    public void updateTodo(Long todoId, TodoRequestDto todoRequestDto) {
+    public void updateTodo(Long todoId, TodoRequestDto param) {
         Optional<Todo> todoOptional = todoRepository.findById(todoId);
 
         Todo todo = todoOptional.orElseThrow(() -> new NoSuchElementException("대상이 존재하지 않음"));
-        TodoRequestMapper.INSTANCE.updateFromDto(todoRequestDto,todo);
+
+        if(param.getFolderId()!=null) {
+            Folder folder = folderRepository.getById(param.getFolderId());
+            if (todo.getFolder() != folder) {
+                todo.changeFolder(folder);
+            }
+        }
+        if(contentChanged(param, todo)){
+            todo.changeContent(param.getContent());
+        }
+        if(doneChanged(param, todo)){
+            todo.changeStatus(param.getDone());
+        }
+        if(dueDateChanged(param, todo)){
+            todo.changeDueDateTime(param.getDueDateTime());
+        }
+    }
+
+    private boolean dueDateChanged(TodoRequestDto param, Todo todo) {
+        return param.getDueDateTime() != null && todo.getDueDateTime() != param.getDueDateTime();
+    }
+
+    private boolean doneChanged(TodoRequestDto param, Todo todo) {
+        return param.getDone() != null && todo.getDone() != param.getDone();
+    }
+
+    private boolean contentChanged(TodoRequestDto param, Todo todo) {
+        return StringUtils.hasText(param.getContent()) && todo.getContent() != param.getContent();
     }
 }
