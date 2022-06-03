@@ -1,7 +1,10 @@
 package com.smalldogg.rememberplease.domain.weather;
 
+import com.smalldogg.rememberplease.domain.weather.dto.LocationDto;
 import com.smalldogg.rememberplease.domain.weather.dto.WeatherResponseDto;
 import com.smalldogg.rememberplease.domain.weather.repository.WeatherRepository;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,7 +19,26 @@ import java.util.Optional;
 class WeatherServiceTest {
 
     @Autowired
+    WeatherService weatherService;
+
+    @Autowired
     WeatherRepository weatherRepository;
+
+    LocationDto locationDto;
+
+    @BeforeEach
+    void setUp() {
+        this.locationDto = new LocationDto();
+        locationDto.setLatitude("37.3190288");
+        locationDto.setLongitude("126.9782842");
+        locationDto.setX("60");
+        locationDto.setY("121");
+    }
+
+    @Test
+    void getWeather(){
+        weatherService.getWeather(locationDto);
+    }
 
     @Test
     public void WeatherTest(){

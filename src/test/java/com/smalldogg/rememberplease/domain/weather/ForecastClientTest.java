@@ -21,4 +21,5 @@ class ForecastClientTest {
     void forecastClientTest() throws URISyntaxException {
         forecastClient.getForecast("60","121");
     }
+
 }
